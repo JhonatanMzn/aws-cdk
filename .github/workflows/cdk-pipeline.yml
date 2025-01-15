@@ -51,7 +51,7 @@ jobs:
       
       - name: Install dependencies
         run: |
-          cd cdk-ts
+          cd cdk-js
           npm install
 
       # - name: Install dependencies
@@ -59,7 +59,7 @@ jobs:
 
       - name: Build TypeScript files
         run: |
-          cd cdk-ts
+          cd cdk-js
           npm run build
 
       # Esto solo se usa para implementar el CDK en AWS
@@ -71,7 +71,7 @@ jobs:
 
       - name: Deploy Stacks
         run: |
-          cd cdk-ts
+          cd cdk-js
           npx cdk deploy --all --require-approval never
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
