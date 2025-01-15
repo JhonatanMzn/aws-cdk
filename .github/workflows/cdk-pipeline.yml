@@ -39,19 +39,30 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: 3.12
+      # - name: Setup Python
+      #   uses: actions/setup-python@v5
+      #   with:
+      #     python-version: 3.12
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
-
+      
       - name: Install dependencies
-        run: python -m pip install -r cdk/requirements.txt
+        run: |
+          cd cdk-ts
+          npm install
 
+      # - name: Install dependencies
+      #   run: python -m pip install -r cdk/requirements.txt
+
+      - name: Build TypeScript files
+        run: |
+          cd cdk-ts
+          npm run build
+
+      # Esto solo se usa para implementar el CDK en AWS
       - name: Bootstrap CDK
         run: npx cdk bootstrap aws://058264425964/us-east-1
         env:
@@ -60,7 +71,7 @@ jobs:
 
       - name: Deploy Stacks
         run: |
-          cd cdk 
+          cd cdk-ts
           npx cdk deploy --all --require-approval never
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
