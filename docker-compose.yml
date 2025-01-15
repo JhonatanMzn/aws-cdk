@@ -1,0 +1,19 @@
+
+services:
+  app-cdk:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    working_dir: /app
+    
+
+# aws configure
+# cdk bootstrap aws://<tu-id-de-cuenta>/<tu-región>
+
+
+# cdk init app --language python
+# python -m pip install -r requirements.txt
+# aws sts get-caller-identity --query "Account" --output text
+# aws sts get-caller-identity --profile your-profile-name --query "Account" --output text
