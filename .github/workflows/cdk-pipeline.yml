@@ -1,12 +1,5 @@
 name: CDK Pipeline
 
-on:
-  pull_request:
-    branches:
-      - main
-  push:
-    branches:
-      - main
 
 jobs:
   cdk-diff:
